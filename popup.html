@@ -3,17 +3,20 @@
 <head>
     <style>
         body {
-            width: 300px;
+            width: 320px;
             font-family: Arial, sans-serif;
             padding: 15px;
             text-align: center;
         }
 
-        #url-display {
-            font-size: 12px;
-            color: #555;
-            word-break: break-all;
+        #url-input {
+            width: 90%;
+            padding: 8px;
             margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #333;
         }
 
         .percentage-box {
@@ -27,18 +30,17 @@
         .safe {background-color: #d4edda; color: #155724; }
         .moderate {background-color: #fff3cd; color: #856404;}
         .highrisk {background-color: #fff3cd; color: #721c24;}
-        .danger {background-color: #f8d7da; color: #660a93;}
+        .danger {background-color: #fff3cd; color: rgb(111, 0, 175);}
     </style>
 </head>
 <body>
     <h3>Link Scanner</h3>
-    <div id="url-display">...</div>
+    <input type="text" id="url-input" placeholder="Paste link here..." />
     <button id="scan-btn">SCAN</button>
 
     <div id="result-area" style="display:none;"> 
         <p>Risk level percentage:</p>
         <div id="per-text" class="percentage-box">--%</div>
-        <p id="status-message"></p>
     </div>
     
     <script src="popup.js"></script>

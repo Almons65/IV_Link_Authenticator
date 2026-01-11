@@ -6,6 +6,10 @@
     "permissions": [
         "activeTab"
     ],
+    "host_permissions": [
+        "http://127.0.0.1/*",
+        "http://localhost/*"
+    ],
     "action": {
         "default_popup": "popup.html",
         "default_icon": {
@@ -14,8 +18,4 @@
             "128": "IV.png"
         }
     }
-
-
-
-
 }

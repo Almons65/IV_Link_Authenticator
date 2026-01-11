@@ -6,55 +6,72 @@ document.addEventListener('DOMContentLoaded', function() {
         let curTab = tabs[0];
         let curUrl = curTab.url; 
         
-        const urlDisplay = document.getElementById('url-display');
-        if (urlDisplay) {
-             urlDisplay.textContent = curUrl;
+        const urlInput = document.getElementById('url-input');
+        if (urlInput) {
+             urlInput.value = curUrl;
         }
 
         const scanBtn = document.getElementById('scan-btn');
         if (scanBtn) {
             scanBtn.addEventListener('click', function() {
-                analyzeLink(curUrl);
+                const urlCheck = urlInput.value
+                analyzeLink(urlCheck);
             });
         }
     });
 });
 
-function analyzeLink(url) {
+function analyzeLink(urlScan) {
     document.getElementById('per-text').textContent = "Analyzing...";
     document.getElementById('result-area').style.display = "block";
 
-    console.log("Sending URL to Algorithm:", url);
+    document.getElementById('per-text').className = "percentage-box";
 
-    
-    setTimeout(() => {
-        const mockRiskScore = Math.floor(Math.random() * 100); 
+    console.log("Sending URL to Algorithm:", urlScan);
+
+    setTimeout(async () => {
+        try {
+            const response = await fetch("http://127.0.0.1:8000/checkURL", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ url: urlScan })
+            });
+            
+            const data = await response.json();
+            displayResult(data.RiskLevel);
+            
+        } catch (error) {
+            console.log("Error : Status Code 500");
+            document.getElementById('per-text').textContent = "Error";
+            document.getElementById('per-text').classList.add('danger');
+        }
         
-        displayResult(mockRiskScore);
-    }, 1000);
+    }, 1000)
 }
 
-function displayResult(num) {
+function displayResult(riskPer) {
     const PerBox = document.getElementById('per-text');
-    const msg = document.getElementById('status-message');
-    
-    PerBox.textContent = num + "%";
     
     PerBox.classList.remove('safe', 'moderate', 'highrisk', 'danger');
 
-    if (num <= 30) {
+    let label = "";
+
+    if (riskPer <= 30) {
+        label = "Low Threat";
         PerBox.classList.add('safe');
-        msg.textContent = "Safe";
-    } else if (num <= 70) {
+
+    } else if (riskPer <= 70) {
+        label = "Medium Threat";
         PerBox.classList.add('moderate');
-        msg.textContent = "Warning: Proceed with caution.";
-        
-    } else if (num <= 90){
-        PerBox.classList.add('high risk');
-        msg.textContent = "Warning: Input restricted.";
+
+    } else if (riskPer <= 90){
+        label = "High Threat";
+        PerBox.classList.add('highrisk');
 
     } else {
+        label = "DANGER";
         PerBox.classList.add('danger');
-        msg.textContent = "DANGER!";
     }
+
+    PerBox.textContent = `${label} (${riskPer}% Risk)`;
 }
