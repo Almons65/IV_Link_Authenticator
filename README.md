@@ -41,7 +41,7 @@ This system designed to detect phishing attempts, scam websites, and malicious d
 Mocked Data: returns static JSON.
 No Persistence: Refreshing the page resets the state.
 UI: Styling is minimal/functional only.
-# How to Run
+# How to Run & Use
 Prerequisites:
 - Node.js
 - Python
@@ -51,11 +51,28 @@ Steps:
 1.  Clone the repository:
    bash git clone https://github.com/Almons65/IV_Link_Authenticator.git
 
-3. install dependencies:
+2. install dependencies:
    bash pip install -r requirements.txt
 
-4. start the API:
+3. start the API:
   bash uvicorn Link_algo:app --reload
+
+4. select the program directory and add it as a google extension
+
+   <img width="1919" height="1079" alt="select directory" src="https://github.com/user-attachments/assets/97b1c0a5-e2db-4a2d-842b-2efff53b4f11" />
+
+   <img width="1919" height="1079" alt="add as google extension" src="https://github.com/user-attachments/assets/bdfb6e56-9970-4276-8e85-4001cf615e9a" />
+
+5. click inside the extension and trigger the scan button then it will pop up a analyzing label while waiting the scan
+
+   <img width="1919" height="1079" alt="click inside the extension" src="https://github.com/user-attachments/assets/72ba2b23-b7d9-4f5f-a6d3-2ac6ae03c017" />
+
+   <img width="1919" height="1079" alt="analyzing stage" src="https://github.com/user-attachments/assets/2509e8cc-1a03-4e16-b5dd-a04c6d04c4a8" />
+
+6. Scan completed, Threat level percentage displayed
+
+   <img width="1919" height="1079" alt="result displayed" src="https://github.com/user-attachments/assets/c5b519aa-4335-487c-830d-1f047c2d4c2c" />
+
 
 ## Future Improvements
 * Implement real API integration.
